@@ -1,12 +1,17 @@
 from tkinter import *
-from tkinter import messagebox as ms
+from tkinter import messagebox as ms, ttk
 
 import mysql.connector
+import tk
+
 
 database = mysql.connector.connect(host="localhost",
                                    user="root",
                                    password="123456789",
                                    database="log")
+
+
+
 
 
 class main:
@@ -17,6 +22,9 @@ class main:
         self.n_username = StringVar()
         self.n_password = StringVar()
         self.widgets()
+
+
+
 
     def login(self):
         c = database.cursor()
@@ -31,6 +39,8 @@ class main:
             self.head['pady'] = 150
 
             # переброс должен быть тут на другое окно
+            # но не факт
+
 
         else:
             ms.showerror('Уведомление', 'Данный пользователь не найден')
@@ -88,8 +98,39 @@ class main:
             column=1)
 
 
+
+
+
 if __name__ == '__main__':
     root = Tk()
     root.title('Авторизация')
     main(root)
     root.mainloop()
+
+
+
+# class App(tk.Tk):
+#     def __init__(self):
+#         super().__init__()
+#         user_types = ("Админ", "Менеджер", "Клиент")
+#         self.user_type = tk.StringVar()
+#         self.user_type.set(user_types[0])
+#
+#         label = tk.Label(self, text="Пожалуйста, выберите роль пользователя")
+#         radios = [tk.Radiobutton(self, text=t, value=t,
+#                                  variable=self.user_type) for t in user_types]
+#         btn = tk.Button(self, text="Создать", command=self.open_window)
+#
+#         label.pack(padx=10, pady=10)
+#         for radio in radios:
+#             radio.pack(padx=10, anchor=tk.W)
+#         btn.pack(pady=10)
+#
+#     def open_window(self):
+#         window = UserForm(self, self.user_type.get())
+#         user = window.open()
+#         print(user)
+#
+# if __name__ == "__main__":
+#     app = App()
+#     app.mainloop()
